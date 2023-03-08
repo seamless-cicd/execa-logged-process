@@ -2,4 +2,4 @@ export {
   createLoggedProcess,
   handleProcessError,
 } from './create-logged-process';
-export { emitLog } from './log-emitter';
+export { LogEmitter } from './log-emitter';
