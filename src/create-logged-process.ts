@@ -14,7 +14,7 @@ async function createLoggedProcess(
   userOptions: Options = defaultOptions,
   logReceiverUrl: string,
 ) {
-  const logger = new LogEmitter<any>(logReceiverUrl, true);
+  const logger = new LogEmitter(logReceiverUrl, true);
 
   const childProcess = execa(execaFile, execaArgs, {
     ...defaultOptions,
