@@ -41,7 +41,7 @@ async function handleProcessError(
   logReceiverUrl: string,
   logToConsole = true,
 ) {
-  const logger = new LogEmitter<any>(logReceiverUrl, true);
+  const logger = new LogEmitter(logReceiverUrl, true);
 
   await logger.emit(error.shortMessage, {});
   await logger.emit('Error occurred', {});
