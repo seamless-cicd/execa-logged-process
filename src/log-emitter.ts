@@ -1,9 +1,7 @@
 import { ulid, decodeTime } from 'ulidx';
 import axios from 'axios';
 
-type OtherData<T> = Record<string, T>;
-
-export class LogEmitter<T> {
+class LogEmitter {
   private logReceiverUrl: string;
   private logToConsole: boolean;
 
@@ -12,15 +10,15 @@ export class LogEmitter<T> {
     this.logToConsole = logToConsole;
   }
 
-  async emit(logText: string, otherData: OtherData<T>): Promise<void> {
+  async emit(logText: string, otherData = {}): Promise<void> {
     const newUlid = ulid();
     const ulidTimestamp = decodeTime(newUlid);
 
     const logObj = {
       id: newUlid,
-      ulidTimestamp,
-      log: logText,
+      message: logText,
       timestamp: new Date(ulidTimestamp).toISOString(),
+      score: ulidTimestamp,
       ...otherData,
     };
 
@@ -31,3 +29,5 @@ export class LogEmitter<T> {
     }
   }
 }
+
+export { LogEmitter };

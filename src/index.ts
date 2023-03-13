@@ -1,5 +1,2 @@
-export {
-  createLoggedProcess,
-  handleProcessError,
-} from './create-logged-process';
-export { LogEmitter } from './log-emitter';
+export * from './create-logged-process.js';
+export * from './log-emitter.js';

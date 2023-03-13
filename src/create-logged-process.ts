@@ -13,8 +13,9 @@ async function createLoggedProcess(
   execaArgs: string[] = [],
   userOptions: Options = defaultOptions,
   logReceiverUrl: string,
+  logToConsole = true,
 ) {
-  const logger = new LogEmitter(logReceiverUrl, true);
+  const logger = new LogEmitter(logReceiverUrl, logToConsole);
 
   const childProcess = execa(execaFile, execaArgs, {
     ...defaultOptions,
@@ -24,18 +25,18 @@ async function createLoggedProcess(
   const { stdout, stderr } = childProcess;
 
   stdout?.on('data', (data: Buffer) => {
-    logger.emit(data.toString(), {});
+    logger.emit(data.toString(), { type: 'stdout' });
   });
 
   stderr?.on('data', (data: Buffer) => {
-    logger.emit(data.toString(), {});
+    logger.emit(data.toString(), { type: 'stdout' });
   });
 
   return childProcess;
 }
 
 // Emits final error logs and shuts down the process
-// Use in catch(error) block
+// Use in catch block
 async function handleProcessError(
   error: ExecaError,
   logReceiverUrl: string,
@@ -43,8 +44,8 @@ async function handleProcessError(
 ) {
   const logger = new LogEmitter(logReceiverUrl, true);
 
-  await logger.emit(error.shortMessage, {});
-  await logger.emit('Error occurred', {});
+  await logger.emit(error.shortMessage);
+  await logger.emit('Error occurred');
 
   if (logToConsole) {
     console.error(error);
