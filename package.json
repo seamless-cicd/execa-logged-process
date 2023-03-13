@@ -2,10 +2,10 @@
   "name": "@seamless-cicd/execa-logged-process",
   "version": "0.0.2",
   "description": "Create execa processes that emit logs for stdout and stderr",
-  "homepage": "https://github.com/seamless-cicd/execa-logged-processes",
+  "homepage": "https://github.com/seamless-cicd/execa-logged-process",
   "repository": {
     "type": "git",
-    "url": "https://github.com/seamless-cicd/execa-logged-processes.git"
+    "url": "https://github.com/seamless-cicd/execa-logged-process.git"
   },
   "license": "MIT",
   "type": "module",
